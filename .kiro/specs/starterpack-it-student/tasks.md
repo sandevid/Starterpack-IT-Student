@@ -1,0 +1,371 @@
+# Implementation Tasks
+
+## Phase 1: Project Setup & Configuration
+
+- [x] 1. Initialize Next.js 16 project with TypeScript and App Router
+  - [x] 1.1 Create new Next.js project with `npx create-next-app@latest`
+  - [x] 1.2 Configure TypeScript with strict mode
+  - [x] 1.3 Set up ESLint and Prettier
+- [x] 2. Install and configure dependencies
+  - [x] 2.1 Install Supabase packages (@supabase/ssr, @supabase/supabase-js)
+  - [x] 2.2 Install Tailwind CSS and configure custom colors
+  - [x] 2.3 Install Lucide React for icons
+  - [x] 2.4 Install React Hook Form and Zod
+  - [x] 2.5 Install React Hot Toast
+  - [x] 2.6 Install React DayPicker and date-fns
+- [x] 3. Configure Tailwind CSS with design system
+  - [x] 3.1 Add custom colors to tailwind.config.ts (space-cadet, slate-gray, tan, coffee, caput, cream)
+  - [x] 3.2 Configure font families (Inter, Playfair Display, JetBrains Mono)
+  - [x] 3.3 Set up mobile-first layout constraints (max-width: 430px)
+- [x] 4. Set up Supabase project
+  - [x] 4.1 Create Supabase project in dashboard
+  - [x] 4.2 Run database schema SQL (profiles, calendar_events, todos, goals, goal_steps, playlists, essentials)
+  - [x] 4.3 Enable Row Level Security policies for all tables
+  - [x] 4.4 Configure Google OAuth provider in Supabase Auth
+  - [x] 4.5 Set up environment variables (.env.local)
+- [x] 5. Create base project structure
+  - [x] 5.1 Create folder structure (app, components, actions, lib, types)
+  - [x] 5.2 Set up route groups: (auth) and (app)
+  - [x] 5.3 Create root layout with global styles
+  - [x] 5.4 Configure globals.css with design system styles
+
+## Phase 2: Core Infrastructure
+
+- [x] 6. Set up Supabase clients
+  - [x] 6.1 Create browser client (lib/supabase/client.ts)
+  - [x] 6.2 Create server client (lib/supabase/server.ts)
+  - [x] 6.3 Create middleware helper (lib/supabase/middleware.ts)
+- [x] 7. Create TypeScript types
+  - [x] 7.1 Define database types (types/database.types.ts)
+  - [x] 7.2 Create type unions (EventColor, TodoTag, EssentialIcon, EssentialCategory)
+  - [x] 7.3 Define interfaces for all entities
+- [x] 8. Create Zod validation schemas
+  - [x] 8.1 Calendar event schema (lib/validations/calendar.ts)
+  - [x] 8.2 Todo schema (lib/validations/todo.ts)
+  - [x] 8.3 Goal and goal step schemas (lib/validations/goal.ts)
+  - [x] 8.4 Playlist schema (lib/validations/playlist.ts)
+  - [x] 8.5 Essential schema (lib/validations/essential.ts)
+- [x] 9. Build reusable UI components
+  - [x] 9.1 Create Modal component (bottom sheet) (components/ui/Modal.tsx)
+  - [x] 9.2 Create EmptyState component (components/ui/EmptyState.tsx)
+  - [x] 9.3 Create PageHeader component (components/ui/PageHeader.tsx)
+  - [x] 9.4 Create Card component (components/ui/Card.tsx)
+  - [x] 9.5 Create Button component with loading states (components/ui/Button.tsx)
+
+## Phase 3: Module 1 - Google OAuth Authentication
+
+- [x] 10. Implement authentication middleware
+  - [x] 10.1 Create middleware.ts with Supabase session refresh
+  - [x] 10.2 Add route protection logic (redirect unauthenticated users)
+  - [x] 10.3 Configure middleware matcher pattern
+- [x] 11. Create login page
+  - [x] 11.1 Create app/(auth)/login/page.tsx (Server Component)
+  - [x] 11.2 Create LoginButton client component
+  - [x] 11.3 Implement Google OAuth sign-in flow
+  - [x] 11.4 Style login page with design system
+- [x] 12. Create OAuth callback handler
+  - [x] 12.1 Create app/auth/callback/route.ts
+  - [x] 12.2 Implement code exchange for session
+  - [x] 12.3 Create or update user profile in database
+  - [x] 12.4 Redirect to home dashboard
+- [x] 13. Implement logout functionality
+  - [x] 13.1 Create signOut server action (actions/auth.ts)
+  - [x] 13.2 Clear session and redirect to login
+- [x] 14. Test authentication flow
+  - [x] 14.1 Test Google OAuth login
+  - [x] 14.2 Test profile creation on first login
+  - [x] 14.3 Test route protection
+  - [x] 14.4 Test logout functionality
+
+## Phase 4: Module 2 - Home Dashboard
+
+- [x] 15. Create app layout with bottom navigation
+  - [x] 15.1 Create app/(app)/layout.tsx
+  - [x] 15.2 Create BottomNav component (components/BottomNav.tsx)
+  - [x] 15.3 Implement active tab highlighting
+  - [x] 15.4 Add padding for fixed bottom navigation
+- [x] 16. Build home dashboard page
+  - [x] 16.1 Create app/(app)/page.tsx (Server Component)
+  - [x] 16.2 Fetch user profile data
+  - [x] 16.3 Query dashboard statistics (todo count, goal count, event count)
+  - [x] 16.4 Fetch preview data (5 todos, 3 events)
+- [x] 17. Create dashboard UI components
+  - [x] 17.1 Create Greeting component with user avatar and name
+  - [x] 17.2 Create StatsCards component
+  - [x] 17.3 Create TodoPreview component
+  - [x] 17.4 Create CalendarPreview component
+  - [x] 17.5 Add empty states for preview sections
+- [x] 18. Test home dashboard
+  - [x] 18.1 Test data fetching and display
+  - [x] 18.2 Test empty states
+  - [x] 18.3 Test navigation between tabs
+
+## Phase 5: Module 3 - Academic Calendar
+
+- [x] 19. Create calendar page
+  - [x] 19.1 Create app/(app)/calendar/page.tsx (Server Component)
+  - [x] 19.2 Fetch all calendar events for user
+  - [x] 19.3 Sort events by date
+- [x] 20. Implement calendar view
+  - [x] 20.1 Create Calendar component with React DayPicker
+  - [x] 20.2 Display color-coded markers on dates with events
+  - [x] 20.3 Implement date selection
+  - [x] 20.4 Create color mapping (exam=red, deadline=brown, event=gray, reminder=tan)
+- [x] 21. Create event list component
+  - [x] 21.1 Create CalendarEventList component
+  - [x] 21.2 Create CalendarEventCard component
+  - [x] 21.3 Display events sorted by date
+  - [x] 21.4 Add edit and delete buttons
+- [x] 22. Build calendar event form
+  - [x] 22.1 Create CalendarEventForm component
+  - [x] 22.2 Implement React Hook Form with Zod validation
+  - [x] 22.3 Add date picker input
+  - [x] 22.4 Create color selector (4 options)
+  - [x] 22.5 Add notes textarea
+- [x] 23. Implement calendar server actions
+  - [x] 23.1 Create createCalendarEvent action (actions/calendar.ts)
+  - [x] 23.2 Create updateCalendarEvent action
+  - [x] 23.3 Create deleteCalendarEvent action
+  - [x] 23.4 Add authentication checks and validation
+  - [x] 23.5 Implement revalidatePath for data refresh
+- [x] 24. Add toast notifications
+  - [x] 24.1 Success toast for create/update/delete
+  - [x] 24.2 Error toast for failures
+- [x] 25. Test calendar module
+  - [x] 25.1 Test event creation
+  - [x] 25.2 Test event editing
+  - [x] 25.3 Test event deletion
+  - [x] 25.4 Test color-coded markers
+  - [x] 25.5 Test empty state
+
+## Phase 6: Module 4 - To-Do List
+
+- [x] 26. Create tasks page
+  - [x] 26.1 Create app/(app)/tasks/page.tsx (Server Component)
+  - [x] 26.2 Fetch all todos for user
+  - [x] 26.3 Separate todos by completion status
+- [x] 27. Implement todo list component
+  - [x] 27.1 Create TodoList component with collapsible sections
+  - [x] 27.2 Create "In Progress" section
+  - [x] 27.3 Create "Done" section (collapsible)
+  - [x] 27.4 Display count of hidden items when collapsed
+- [x] 28. Create todo item component
+  - [x] 28.1 Create TodoItem component
+  - [x] 28.2 Implement checkbox with optimistic UI update
+  - [x] 28.3 Display title and tag badge
+  - [x] 28.4 Add edit and delete buttons
+  - [x] 28.5 Create tag color mapping
+- [x] 29. Build todo form
+  - [x] 29.1 Create TodoForm component
+  - [x] 29.2 Implement React Hook Form with Zod validation
+  - [x] 29.3 Add title input
+  - [x] 29.4 Create tag selector (6 options)
+- [x] 30. Implement todo server actions
+  - [x] 30.1 Create createTodo action (actions/todos.ts)
+  - [x] 30.2 Create updateTodo action
+  - [x] 30.3 Create toggleTodo action (for optimistic updates)
+  - [x] 30.4 Create deleteTodo action
+  - [x] 30.5 Add authentication checks and validation
+- [x] 31. Add toast notifications
+  - [x] 31.1 Success toast for create/update/delete
+  - [x] 31.2 Error toast for failures
+- [x] 32. Test todo module
+  - [x] 32.1 Test todo creation
+  - [x] 32.2 Test todo editing
+  - [x] 32.3 Test todo deletion
+  - [x] 32.4 Test checkbox toggle with optimistic update
+  - [x] 32.5 Test collapsible sections
+  - [x] 32.6 Test empty state
+
+## Phase 7: Module 5 - Goals Tracker
+
+- [x] 33. Create goals page
+  - [x] 33.1 Create app/(app)/goals/page.tsx (Server Component)
+  - [x] 33.2 Fetch all goals with steps for user
+  - [x] 33.3 Calculate progress for each goal
+- [x] 34. Implement goal list component
+  - [x] 34.1 Create GoalList component
+  - [x] 34.2 Display expandable goal cards
+  - [x] 34.3 Implement expand/collapse state management
+- [x] 35. Create goal card component
+  - [x] 35.1 Create GoalCard component
+  - [x] 35.2 Display title and progress bar (collapsed state)
+  - [x] 35.3 Display steps list (expanded state)
+  - [x] 35.4 Add edit and delete buttons
+  - [x] 35.5 Implement progress calculation function
+- [x] 36. Create goal step component
+  - [x] 36.1 Create GoalStepItem component
+  - [x] 36.2 Implement checkbox with optimistic UI update
+  - [x] 36.3 Display step title
+  - [x] 36.4 Add delete button
+- [x] 37. Build goal forms
+  - [x] 37.1 Create GoalForm component
+  - [x] 37.2 Create GoalStepForm component (inline)
+  - [x] 37.3 Implement React Hook Form with Zod validation
+- [x] 38. Implement goal server actions
+  - [x] 38.1 Create createGoal action (actions/goals.ts)
+  - [x] 38.2 Create updateGoal action
+  - [x] 38.3 Create deleteGoal action (cascade delete steps)
+  - [x] 38.4 Create createGoalStep action
+  - [x] 38.5 Create toggleGoalStep action (for optimistic updates)
+  - [x] 38.6 Create deleteGoalStep action
+  - [x] 38.7 Add authentication checks and validation
+- [x] 39. Add toast notifications
+  - [x] 39.1 Success toast for create/update/delete
+  - [x] 39.2 Error toast for failures
+- [x] 40. Test goals module
+  - [x] 40.1 Test goal creation
+  - [x] 40.2 Test goal editing
+  - [x] 40.3 Test goal deletion (verify cascade delete)
+  - [x] 40.4 Test step creation
+  - [x] 40.5 Test step toggle with optimistic update
+  - [x] 40.6 Test step deletion
+  - [x] 40.7 Test progress calculation
+  - [x] 40.8 Test expand/collapse functionality
+  - [x] 40.9 Test empty state
+
+## Phase 8: Module 6 - Study Playlists
+
+- [x] 41. Create more menu page
+  - [x] 41.1 Create app/(app)/more/page.tsx
+  - [x] 41.2 Add navigation links to playlists and essentials
+  - [x] 41.3 Add logout button
+- [x] 42. Create playlists page
+  - [x] 42.1 Create app/(app)/more/playlists/page.tsx (Server Component)
+  - [x] 42.2 Fetch all playlists for user
+- [x] 43. Implement playlist list component
+  - [x] 43.1 Create PlaylistList component
+  - [x] 43.2 Create PlaylistCard component
+  - [x] 43.3 Display music icon, name, description
+  - [x] 43.4 Add "Open Spotify" button (external link with security attributes)
+  - [x] 43.5 Add edit and delete buttons
+- [x] 44. Build playlist form
+  - [x] 44.1 Create PlaylistForm component
+  - [x] 44.2 Implement React Hook Form with Zod validation
+  - [x] 44.3 Add name input
+  - [x] 44.4 Add description textarea
+  - [x] 44.5 Add URL input with Spotify validation
+- [x] 45. Implement playlist server actions
+  - [x] 45.1 Create createPlaylist action (actions/playlists.ts)
+  - [x] 45.2 Create updatePlaylist action
+  - [x] 45.3 Create deletePlaylist action
+  - [x] 45.4 Add authentication checks and validation
+- [x] 46. Add toast notifications
+  - [x] 46.1 Success toast for create/update/delete
+  - [x] 46.2 Error toast for failures
+- [x] 47. Test playlists module
+  - [x] 47.1 Test playlist creation
+  - [x] 47.2 Test playlist editing
+  - [x] 47.3 Test playlist deletion
+  - [x] 47.4 Test Spotify URL validation
+  - [x] 47.5 Test external link security
+  - [x] 47.6 Test empty state
+
+## Phase 9: Module 7 - School Essentials
+
+- [x] 48. Create essentials page
+  - [x] 48.1 Create app/(app)/more/essentials/page.tsx (Server Component)
+  - [x] 48.2 Fetch all essentials for user
+- [x] 49. Implement essentials grid component
+  - [x] 49.1 Create EssentialsGrid component (2-column layout)
+  - [x] 49.2 Create EssentialCard component
+  - [x] 49.3 Display icon, name, description, category badge
+  - [x] 49.4 Add edit and delete buttons
+  - [x] 49.5 Implement dynamic icon rendering
+- [x] 50. Create icon selector component
+  - [x] 50.1 Create IconSelector component
+  - [x] 50.2 Display all 10 icon options in grid
+  - [x] 50.3 Implement selection highlighting
+  - [x] 50.4 Return icon name string
+- [x] 51. Build essential form
+  - [x] 51.1 Create EssentialForm component
+  - [x] 51.2 Implement React Hook Form with Zod validation
+  - [x] 51.3 Add name input
+  - [x] 51.4 Add description textarea
+  - [x] 51.5 Integrate IconSelector component
+  - [x] 51.6 Add category selector (5 options)
+- [x] 52. Implement essential server actions
+  - [x] 52.1 Create createEssential action (actions/essentials.ts)
+  - [x] 52.2 Create updateEssential action
+  - [x] 52.3 Create deleteEssential action
+  - [x] 52.4 Add authentication checks and validation
+- [x] 53. Add toast notifications
+  - [x] 53.1 Success toast for create/update/delete
+  - [x] 53.2 Error toast for failures
+- [x] 54. Test essentials module
+  - [x] 54.1 Test essential creation
+  - [x] 54.2 Test essential editing
+  - [x] 54.3 Test essential deletion
+  - [x] 54.4 Test icon selection
+  - [x] 54.5 Test category validation
+  - [x] 54.6 Test 2-column grid layout
+  - [x] 54.7 Test empty state
+
+## Phase 10: Testing & Quality Assurance
+
+- [x] 55. Set up testing infrastructure
+  - [x] 55.1 Install Jest and React Testing Library
+  - [x] 55.2 Install fast-check for property-based testing
+  - [x] 55.3 Configure Jest for Next.js
+  - [x] 55.4 Set up test database
+- [x] 56. Write unit tests for components
+  - [x] 56.1 Test Modal component
+  - [x] 56.2 Test EmptyState component
+  - [x] 56.3 Test PageHeader component
+  - [x] 56.4 Test Card component
+  - [x] 56.5 Test Button component
+  - [x] 56.6 Test BottomNav component
+- [x] 57. Write unit tests for server actions
+  - [x] 57.1 Test calendar actions
+  - [x] 57.2 Test todo actions
+  - [x] 57.3 Test goal actions
+  - [x] 57.4 Test playlist actions
+  - [x] 57.5 Test essential actions
+- [x] 58. Write property-based tests
+  - [x] 58.1 Test date round-trip preservation (Property 51)
+  - [x] 58.2 Test calendar event ordering (Property 14)
+  - [x] 58.3 Test goal progress calculation (Property 23)
+  - [x] 58.4 Test goal progress boundary cases (Property 31)
+  - [x] 58.5 Test todo tag validation (Property 21)
+  - [x] 58.6 Test playlist URL validation (Property 33)
+  - [x] 58.7 Test data isolation via RLS (Property 6)
+- [x] 59. Run integration tests
+  - [x] 59.1 Test authentication flow end-to-end
+  - [x] 59.2 Test CRUD operations for all modules
+  - [x] 59.3 Test optimistic UI updates
+  - [x] 59.4 Test form validation
+- [x] 60. Perform manual testing
+  - [x] 60.1 Test on mobile viewport (430px)
+  - [x] 60.2 Test all navigation flows
+  - [x] 60.3 Test empty states
+  - [x] 60.4 Test error handling
+  - [x] 60.5 Test toast notifications
+- [x] 61. Run diagnostics and fix issues
+  - [x] 61.1 Check TypeScript compilation
+  - [x] 61.2 Run ESLint and fix warnings
+  - [x] 61.3 Check for console errors
+  - [x] 61.4 Verify RLS policies
+
+## Phase 11: Deployment
+
+- [ ] 62. Prepare for deployment
+  - [ ] 62.1 Set up production Supabase project
+  - [ ] 62.2 Run database migrations on production
+  - [ ] 62.3 Configure Google OAuth for production domain
+  - [ ] 62.4 Set up environment variables in Vercel
+- [ ] 63. Deploy to Vercel
+  - [ ] 63.1 Connect GitHub repository to Vercel
+  - [ ] 63.2 Configure build settings
+  - [ ] 63.3 Deploy to production
+  - [ ] 63.4 Monitor build logs
+- [ ] 64. Post-deployment testing
+  - [ ] 64.1 Test authentication flow on production
+  - [ ] 64.2 Test all CRUD operations
+  - [ ] 64.3 Test on different browsers
+  - [ ] 64.4 Test mobile responsiveness
+  - [ ] 64.5 Monitor error logs
+- [ ] 65. Documentation and handoff
+  - [ ] 65.1 Document environment setup
+  - [ ] 65.2 Document deployment process
+  - [ ] 65.3 Create user guide (optional)
+  - [ ] 65.4 Document known issues and future enhancements

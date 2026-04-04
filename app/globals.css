@@ -1,26 +1,58 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Design System Colors */
+@theme {
+  --color-space-cadet: #25344f;
+  --color-slate-gray: #617891;
+  --color-tan: #d5b893;
+  --color-coffee: #6f4d38;
+  --color-caput: #632024;
+  --color-cream: #f5f0e8;
+
+  /* Font families */
+  --font-inter: var(--font-inter);
+  --font-playfair: var(--font-playfair);
+  --font-jetbrains: var(--font-jetbrains);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Base styles */
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+/* Utility classes for design system */
+.font-inter {
+  font-family: var(--font-inter);
+}
+
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
+.font-jetbrains {
+  font-family: var(--font-jetbrains);
+}
+
+/* Animation for bottom sheet modal */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
 }
